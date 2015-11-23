@@ -2,20 +2,85 @@
 <html>
 
 <head>
-    <title>Working On A Name</title>
-    <link rel="stylesheet" href="styles/main.css" type="text/css" />
+    <meta charset='utf-8' />
+    <title>Play With Me</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCDfuKhK9Dl3cZJ2EsbxXBLEFz3F-v8Vw">
-    </script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+    <link href='styles/main.css' rel='stylesheet' />
 </head>
 
 <body>
-    <header>
-        Your Location
-    </header>
-    <div id="map"></div>
-    <button id="goButton">Find My Location</button>
+    <div class="navbar navbar-default badge-primary navbar-fixed-top">
+        <div class="navbar-header"><a class="navbar-brand" href="#">PlayWithMe</a>
+            <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="main">
+        <div class="row">
+            <div class="col-xs-8" id="left">
+
+                <h2>Available Games</h2>
+
+                <!-- GAMES LIST -->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a href="">Game</a></div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac
+                    orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a href="">Game</a></div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac
+                    orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a href="">Game</a></div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac
+                    orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+
+                <hr>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a href="">Game</a></div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac
+                    orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
+
+                <hr>
+
+                <!-- GAMES LIST -->
+
+            </div>
+
+            <div class="col-xs-4" id="right">
+                <a href='#' id='geolocate' class='ui-button'>Allow Location Services</a>
+                <div id="map"></div>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>

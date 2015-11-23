@@ -1,20 +1,43 @@
-body{
-    background-color: grey;
+html, body {
+    background-color: white;
     text-align: center;
+    height: 100%
 }
-
-header{
+body {
+    padding-top: 50px;
+}
+#main, #main>.row {
+    height: 100%;
+}
+#left {
+    height: 100%;
+    overflow-y: scroll;
+}
+#right {
+    height: 100%;
+}
+#map{
+    position:absolute;
+    width:100%;
+    top:0;
+    bottom:0;
+}
+.ui-button {
+    background: #3887BE;
+    color: #FFF;
+    display: block;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    width: 160px;
+    margin: -20px 0 0 -80px;
+    z-index: 100;
     text-align: center;
-    font-size: 300%;
-    color: lightgrey;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
 }
-
-#map {
-    width: 500px;
-    height: 400px;
-    margin-left:auto;
-    margin-right:auto;
-    border-width:1px;
-    border-style: solid;
-    display: none;
+.ui-button:hover {
+    background: #3074a4;
+    color: #fff;
 }
