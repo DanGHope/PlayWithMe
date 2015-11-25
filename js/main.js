@@ -2,7 +2,20 @@ var map;
 
 $(document).ready(function() {
     loadMap();
+
+    // Change Modal to Sign Up form
+    $("#createAccount").click(function(){
+        $(".modal-title").text('Create New Account');
+        $("#loginButton").prop('value', 'Create');
+    });
+
+    $(".close").click(function(){
+        $(".modal-title").text('Login');
+        $("#loginButton").prop('value', 'Login');
+    });
+
 });
+
 
 function loadMap() {
 
