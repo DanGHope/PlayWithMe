@@ -5,11 +5,15 @@ $(document).ready(function() {
 
     // Change Modal to Sign Up form
     $("#createAccount").click(function(){
+        $("#createAccount").css({'display': 'none'});
+        $('<div class="form-group" id="emailField"><label class="col-md-4 col-md-offset-1">Email:</label><div class="col-md-5"><input type="text" class="form-control input-sm"></div></div>').prependTo(".form-horizontal");
         $(".modal-title").text('Create New Account');
         $("#loginButton").prop('value', 'Create');
     });
 
     $(".close").click(function(){
+        $("#createAccount").css({'display': 'inline'});
+        $("#emailField").remove();
         $(".modal-title").text('Login');
         $("#loginButton").prop('value', 'Login');
     });
