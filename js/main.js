@@ -1,4 +1,5 @@
 var map;
+var userProfilePicture;
 
 $(document).ready(function() {
     updateMap();
@@ -51,7 +52,7 @@ function loggedIn(username) {
     // Hide Login Button
     $("#loginButton").hide("fast");  
     $("#userProfile").show("fast"); 
-    $("#userName").text(username);  
+    $("#userName").text(username);
     $("#logoutButton").click(function(){
         loggedOut();
         FB.logout(function(response){
@@ -60,10 +61,24 @@ function loggedIn(username) {
     });
 }
 
+function getDisplayPicture(userId) {
+    FB.api(
+        "/"+userId+"/picture",
+        function (response) {
+            $("#userName").prepend('<img id="userPicture" width="19" height="19">');
+            if (response && !response.error) {
+                userProfilePicture = response.data.url
+                $("#userPicture").attr("src", userProfilePicture);
+            }
+        }
+    );
+}
+
 function logAPIResponse() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
         console.log('Successful login for: ' + response.name);
+        getDisplayPicture(response.id);
         $("#status").text('Thanks for logging in, ' + response.name + '!');
         loggedIn(response.name)
     });

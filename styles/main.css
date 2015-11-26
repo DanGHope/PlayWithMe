@@ -47,4 +47,20 @@ body {
 #loginButton, #userProfile{
     padding-right: 10px;
 }
+#userPicture {
+    padding-right: 5px;
+}
 /* NAVBAR END */
+
+.row li {
+  width: 33.3%;
+  float: left;
+}
+
+img {
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
