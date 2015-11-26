@@ -18,6 +18,7 @@ body {
 }
 #map{
     position:absolute;
+    overflow: auto;
     width:100%;
     top:0;
     bottom:0;
