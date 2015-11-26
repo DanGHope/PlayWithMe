@@ -66,7 +66,7 @@ function getDisplayPicture(userId) {
     FB.api(
         "/" + userId + "/picture",
         function(response) {
-            $("#userName").prepend('<img id="userPicture" width="19" height="19">');
+            $("#userName").prepend('<img id="userPicture" width="42" height="42">');
             if (response && !response.error) {
                 userProfilePicture = response.data.url;
                 $("#userPicture").attr("src", userProfilePicture);
