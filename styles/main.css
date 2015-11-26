@@ -42,3 +42,9 @@ body {
     background: #3074a4;
     color: #fff;
 }
+
+/* NAVBAR */
+#loginButton, #userProfile{
+    padding-right: 10px;
+}
+/* NAVBAR END */
