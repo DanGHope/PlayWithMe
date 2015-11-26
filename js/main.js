@@ -4,45 +4,19 @@ var curEvent;
 $(document).ready(function() {
     updateMap();
     loadMap();
+    loadFacebook();
+});
 
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
+function updateMap() {
+    //Request an updated events geojson
+    $.ajax({
+        type: "GET",
+        url: 'php/update_events.php',
+    });
+}
 
-        FB.api(
-            "/me",
-            function(response) {
-                if (response && !response.error) {
-                    console.log(response);
-                }
-            }
-        );
-
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            testAPI();
-        } else if (response.status === 'not_authorized') {
-            // The person is logged into Facebook, but not your app.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
-        } else {
-            // The person is not logged into Facebook, so we're not sure if
-            // they are logged into this app or not.
-            document.getElementById('status').innerHTML = 'Please log ' +
-                'into Facebook.';
-        }
-    }
-
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
-
+// Load Facebook Javascript SDK
+function loadFacebook() {
     window.fbAsyncInit = function() {
         FB.init({
             appId: '1026885190696711',
@@ -51,7 +25,6 @@ $(document).ready(function() {
             xfbml: true, // parse social plugins on this page
             version: 'v2.2' // use version 2.2
         });
-
 
         FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
@@ -68,16 +41,73 @@ $(document).ready(function() {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-                'Thanks for logging in, ' + response.name + '!';
-        });
-    }
+}
 
-});
+function loggedOut() {
+    $("#userProfile").hide("fast");
+    $("#loginButton").show("fast");
+    $("#status").text('Please log into Facebook.');
+}
+
+function loggedIn(username) {
+    // Hide Login Button
+    $("#loginButton").hide("fast");
+    $("#userProfile").show("fast");
+    $("#userName").text(username);
+    $("#logoutButton").click(function() {
+        loggedOut();
+        FB.logout(function(response) {
+            console.log(response.status);
+        });
+    });
+}
+
+function getDisplayPicture(userId) {
+    FB.api(
+        "/" + userId + "/picture",
+        function(response) {
+            $("#userName").prepend('<img id="userPicture" width="19" height="19">');
+            if (response && !response.error) {
+                userProfilePicture = response.data.url;
+                $("#userPicture").attr("src", userProfilePicture);
+            }
+        }
+    );
+}
+
+function logAPIResponse() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+        console.log('Successful login for: ' + response.name);
+        getDisplayPicture(response.id);
+        $("#status").text('Thanks for logging in, ' + response.name + '!');
+        loggedIn(response.name);
+    });
+}
+
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+
+    if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        logAPIResponse();
+    } else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        console.log('Please log into this app.');
+    } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        loggedOut();
+
+    }
+}
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+}
 
 function updateList() {
     $("#game-list").remove();
@@ -98,8 +128,8 @@ function updateList() {
             $("#game-list").append(newEvent);
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
-                    var container=$("#left");
-                    var scrollTo=newEvent;
+                    var container = $("#left");
+                    var scrollTo = newEvent;
                     container.animate({
                         scrollTop: scrollTo.offset().top - container.offset().top - container.scrollTop()
                     });

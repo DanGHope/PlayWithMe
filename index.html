@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
     <div class="navbar navbar-default badge-primary navbar-fixed-top">
         <div class="navbar-header"><a class="navbar-brand" href="#">PlayWithMe</a>
             <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,8 +30,19 @@
             </a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#" data-toggle="modal" data-target="#loginForm">Login</a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="loginButton">
+                    <a href="#" data-toggle="modal" data-target="#loginForm">Login</a>
+                </li>
+                <li class="dropdown" id="userProfile">
+                    <a id="userName" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img id="userPicture">
+                    </a>            
+                <ul class="dropdown-menu">
+                        <li><a id="logoutButton" href="#">Logout</a></li>
+                    </ul>
+                </li>
+                </li>
             </ul>
         </div>
     </div>
@@ -48,7 +58,6 @@
                 <div class="modal-body">
                     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
                     </fb:login-button>
-
                     <div id="status">
                     </div>
                 </div>
