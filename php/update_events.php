@@ -40,7 +40,10 @@ function generate_geojson($db){
                 'marker-color' => '#24d999',
                 'marker-size' => 'medium',
                 'marker-symbol' => $sym,
-                'event' => $event
+                'event' => $event,
+                'title' => $event,
+                'description' => "Looking for people to play $event",
+                'id' => $row['id']
             ),
             'geometry' => array(
                 'type' => 'Point',
