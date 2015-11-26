@@ -5,7 +5,7 @@
     <meta charset='utf-8' />
     <title>Play With Me</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous" />
     <!-- Bootstrap -->
@@ -17,10 +17,11 @@
     <!-- Bootstrap -->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/></script>
     <!-- Bootstrap -->
+    <?php include 'php/update_events.php';?>
 </head>
 
 <body>
-    
+
     <div class="navbar navbar-default badge-primary navbar-fixed-top">
         <div class="navbar-header"><a class="navbar-brand" href="#">PlayWithMe</a>
             <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,7 +31,7 @@
             </a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav">
                 <li><a href="#" data-toggle="modal" data-target="#loginForm">Login</a></li>
             </ul>
         </div>

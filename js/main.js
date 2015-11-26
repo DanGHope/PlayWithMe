@@ -1,6 +1,7 @@
 var map;
 
 $(document).ready(function() {
+    updateMap();
     loadMap();
 
     function statusChangeCallback(response) {
@@ -44,7 +45,7 @@ FB.api(
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '1026885190696711',
-            cookie     : true,  // enable cookies to allow the server to access 
+            cookie     : true,  // enable cookies to allow the server to access
                             // the session
             xfbml      : true,  // parse social plugins on this page
             version    : 'v2.2' // use version 2.2
@@ -76,6 +77,14 @@ FB.api(
 
 });
 
+function updateMap(){
+    //Request an updated events geojson
+    $.ajax({
+        type: "GET",
+        url: 'php/update_events.php',
+    });
+}
+
 function loadMap() {
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ2hvcGUiLCJhIjoiY2loY2M0b3drMDFqbnVlbWF3aGJvYTJ0ZyJ9.NrOUOv9u0AkxEhptyBVexw';
@@ -93,21 +102,9 @@ function loadMap() {
 
     map.on('locationfound', function(e) {
         map.fitBounds(e.bounds);
-
-        myLayer.setGeoJSON({
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [e.latlng.lng, e.latlng.lat]
-            },
-            properties: {
-                'title': 'Here I am!',
-                'marker-color': '#ff8888',
-                'marker-symbol': 'star'
-            }
-        });
-
+        map.setZoom(12);
         geolocate.parentNode.removeChild(geolocate);
+        myLayer.loadURL("php/phpjson.geojson");
     });
 
     map.on('locationerror', function() {
