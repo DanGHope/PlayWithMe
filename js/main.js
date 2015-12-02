@@ -18,6 +18,11 @@ $(document).ready(function() {
         createEvent(name, date, spt, dsc, new_lat, new_lng, userID);
         $("#createGameForm").modal("toggle");
     });
+
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii"
+    });
+
 });
 
 function updateMap() {
