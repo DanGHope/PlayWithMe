@@ -41,3 +41,29 @@
             </div>
         </div>
     </div>
+
+    // My Games Template
+    <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <h4 class="panel-title pull-left">
+                                                <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+                                                Game Title
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-danger" href="#">
+                                                <i class="fa fa-trash-o fa-lg"></i> Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <p>Sport:</p>
+                                        <p># of Participants:</p>
+                                    </div>
+                                </div>    
+                            </li>

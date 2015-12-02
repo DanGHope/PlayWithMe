@@ -113,4 +113,8 @@ img {
 #createGameFormItem .form-control {
     background-color: #FFFFFF;
 }
+#myGamesList h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 /* MODAL END */
