@@ -9,7 +9,7 @@ try{
 
     $lat = $_REQUEST['lat'];
     $lng = $_REQUEST['lng'];
-    $event = "Swagboatting";
+    $event = $_REQUEST['sport'];
 
     $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`) VALUES (?,?,?)");
     $stmt->bindParam(1,$lng);

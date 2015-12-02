@@ -1,10 +1,18 @@
 var map, myLayer;
 var curEvent;
+var new_lat, new_lng;
 
 $(document).ready(function() {
     updateMap();
     loadMap();
     loadFacebook();
+
+    $("#createGameButton").click(function() {
+        var spt = $("#gameSport").val();
+        var dsc = $("#gameDescription").val();
+        createEvent(spt,dsc,new_lat,new_lng);
+        $("#createGameForm").modal("toggle");
+    });
 });
 
 function updateMap() {
@@ -139,6 +147,23 @@ function updateList() {
     });
 }
 
+function createEvent(sport, desc, lat, lng) {
+    $.ajax({
+        type: "POST",
+        url: "php/add_event.php",
+        data: {
+            sport: sport,
+            desc: desc,
+            lat: lat,
+            lng: lng
+        },
+        success: function(data) {
+            console.log("Success: " + data);
+            updateMap();
+        }
+    });
+}
+
 function updateMap() {
     //Request an updated events geojson
     $.ajax({
@@ -183,18 +208,9 @@ function loadMap() {
 
     map.on('click', function(e) {
         console.log(e.containerPoint.toString() + ', ' + e.latlng.toString());
-        $.ajax({
-            type: "POST",
-            url: "php/add_event.php",
-            data: {
-                lat: e.latlng.lat,
-                lng: e.latlng.lng
-            },
-            success: function(data) {
-                console.log("Success: " + data);
-                updateMap();
-            }
-        });
+        $("#createGameForm").modal("toggle");
+        new_lat = e.latlng.lat;
+        new_lng = e.latlng.lng;
     });
 
     map.on('move', function() {
