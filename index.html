@@ -12,13 +12,13 @@
     <!-- Bootstrap end -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <!-- Bootstrap -->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" /></script>
     <!-- Bootstrap end -->
     <!-- Moment.js -->
-    <script type="text/javascript" src="js/momentjs/moment.js"/></script>
+    <script type="text/javascript" src="js/momentjs/moment.js" /></script>
     <!-- Moment.js end -->
     <!-- Datetime-picker.js -->
-    <script type="text/javascript" src="js/datetime-picker/bootstrap-datetimepicker.js"/></script>
+    <script type="text/javascript" src="js/datetime-picker/bootstrap-datetimepicker.js" /></script>
     <!-- Datetime-picker.js end -->
     <script type="text/javascript" src="js/facebook_helper.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -63,7 +63,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
                     <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
@@ -79,12 +81,14 @@
     </div>
     <!-- END LOGIN MODAL -->
 
-     <!-- MY GAMES MODAL -->
+    <!-- MY GAMES MODAL -->
     <div class="modal fade" id="myGames">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
                     <h4 class="modal-title">My Games</h4>
                 </div>
                 <div class="modal-body">
@@ -101,7 +105,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
                     <h4 class="modal-title">Create New Game</h4>
                 </div>
                 <div class="modal-body">
@@ -111,12 +117,13 @@
                                 Event Name:
                             </label>
                             <div id="createGameFormItem">
-                                <input class="form-control" rows="1"></textarea>
+                                <input id="sportName" class="form-control" rows="1">
+                            </input>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>
-                                Sport:                                
+                                Sport:
                             </label>
                             <div id="createGameFormItem">
                                 <select class="form-control" id="sportSelector">
@@ -135,41 +142,41 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                Date/Time:                                
+                                Date/Time:
                             </label>
                             <div id="createGameFormItem">
-                                
 
-<div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
-</div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' id="sportDate" class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(function() {
+                                                $('#datetimepicker1').datetimepicker();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
 
 
                             </div>
                         </div>
-                    
+
                         <div class="form-group">
                             <label>
                                 Description:
                             </label>
                             <div id="createGameFormItem">
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea id="sportDescription" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group">

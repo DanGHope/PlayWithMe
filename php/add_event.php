@@ -10,11 +10,19 @@ try{
     $lat = $_REQUEST['lat'];
     $lng = $_REQUEST['lng'];
     $event = $_REQUEST['sport'];
+    $name = $_REQUEST['name'];
+    $date = $_REQUEST['date'];
+    $owner = $_REQUEST['owner'];
+    $desc = $_REQUEST['desc'];
 
-    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`) VALUES (?,?,?)");
+    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`, `name`, `date`, `owner`, `description`) VALUES (?,?,?,?,?,?)");
     $stmt->bindParam(1,$lng);
     $stmt->bindParam(2,$lat);
     $stmt->bindParam(3,$event);
+    $stmt->bindParam(4,$name);
+    $stmt->bindParam(5,$date);
+    $stmt->bindParam(6,$owner);
+    $stmt->bindParam(7,$desc);
     $stmt->execute();
 
     $db = null;

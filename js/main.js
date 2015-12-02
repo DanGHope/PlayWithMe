@@ -1,19 +1,23 @@
 var map, myLayer;
 var curEvent;
 var new_lat, new_lng;
+var userID;
 
 $(document).ready(function() {
     updateMap();
     loadMap();
+    userID = -1;
     loadFacebook();
 
     $("#createGameButton").click(function() {
-        var spt = $("#gameSport").val();
-        var dsc = $("#gameDescription").val();
-        createEvent(spt,dsc,new_lat,new_lng);
+        var spt = $("#sportSelector").val();
+        var dsc = $("#sportDescription").val();
+        var date = $("#sportDate").val();
+        console.log("DATE: "+date);
+        var name = $("#sportName").val();
+        createEvent(name, date, spt, dsc, new_lat, new_lng, userID);
         $("#createGameForm").modal("toggle");
     });
-    
 });
 
 function updateMap() {
@@ -54,15 +58,18 @@ function updateList() {
     });
 }
 
-function createEvent(sport, desc, lat, lng) {
+function createEvent(name, date, sport, desc, lat, lng, userid) {
     $.ajax({
         type: "POST",
         url: "php/add_event.php",
         data: {
+            name: name,
+            date: date,
             sport: sport,
             desc: desc,
             lat: lat,
-            lng: lng
+            lng: lng,
+            owner: userid
         },
         success: function(data) {
             console.log("Success: " + data);
@@ -114,10 +121,15 @@ function loadMap() {
     });
 
     map.on('click', function(e) {
-        console.log(e.containerPoint.toString() + ', ' + e.latlng.toString());
-        $("#createGameForm").modal("toggle");
-        new_lat = e.latlng.lat;
-        new_lng = e.latlng.lng;
+        console.log(userID);
+        if (userID != -1) {
+            console.log(e.containerPoint.toString() + ', ' + e.latlng.toString());
+            $("#createGameForm").modal("toggle");
+            new_lat = e.latlng.lat;
+            new_lng = e.latlng.lng;
+        } else {
+            $("#loginForm").modal("toggle");
+        }
     });
 
     map.on('move', function() {

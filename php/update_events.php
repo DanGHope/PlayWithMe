@@ -11,24 +11,28 @@ function generate_geojson($db){
     foreach($result as $row){
         $event = $row['event'];
         switch($event){
-            case 'soccer':
+            case 'Soccer':
             $sym = 'soccer';
             break;
 
-            case 'baseball':
+            case 'Baseball':
             $sym = 'baseball';
             break;
 
-            case 'cycling':
+            case 'Cycling':
             $sym = 'bicycle';
             break;
 
-            case 'running':
+            case 'Running':
             $sym = 'school';
             break;
 
-            case 'football':
+            case 'Football':
             $sym = 'america-football';
+            break;
+
+            case 'Basketball':
+            $sym = 'basketball';
             break;
 
             default:

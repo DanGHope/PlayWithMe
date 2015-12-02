@@ -3,8 +3,7 @@ function loadFacebook() {
     window.fbAsyncInit = function() {
         FB.init({
             appId: '1026885190696711',
-            cookie: true, // enable cookies to allow the server to access
-            // the session
+            cookie: true, // enable cookies to allow the server to access the session
             xfbml: true, // parse social plugins on this page
             version: 'v2.2' // use version 2.2
         });
@@ -65,6 +64,7 @@ function logAPIResponse() {
         getDisplayPicture(response.id);
         $("#status").text('Thanks for logging in, ' + response.name + '!');
         loggedIn(response.name);
+        userID=response.id;
     });
 }
 
