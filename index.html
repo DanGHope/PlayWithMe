@@ -8,15 +8,16 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous" />
-    <!-- Bootstrap -->
+    <!-- Bootstrap end -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/></script>
+    <!-- Bootstrap end -->
+    <script type="text/javascript" src="js/facebook_helper.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
     <link href='styles/main.css' rel='stylesheet' />
-    <!-- Bootstrap -->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/></script>
-    <!-- Bootstrap -->
     <?php include 'php/update_events.php';?>
 </head>
 
@@ -39,6 +40,7 @@
                         <img id="userPicture">
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a type="submit" data-toggle="modal" data-target="#myGames" href="#">My Games</a></li>
                         <li><a type="submit" data-toggle="modal" data-target="#createGameForm" href="#">Create Game</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="logoutButton" href="#">Logout</a></li>
@@ -58,6 +60,7 @@
                     <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
+                    <h5>We want real users, please login using your Facebook account!</h5>
                     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
                     </fb:login-button>
                     <div id="status">
@@ -69,6 +72,24 @@
     </div>
     <!-- END LOGIN MODAL -->
 
+     <!-- MY GAMES MODAL -->
+    <div class="modal fade" id="myGames">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">My Games</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- MY GAMES MODAL END -->
+
+    <!-- CREATE GAME MODAL -->
     <div class="modal fade" id="createGameForm">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -80,10 +101,15 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-md-4 col-md-offset-1">
-                                Sport:
+                                Sport:                                
                             </label>
                             <div class="col-md-5">
-                                <input type="text" id="gameSport" class="form-control input-sm">
+                                <select class="form-control" id="sportSelector">
+                                    <option>Basketball</option>
+                                    <option>Soccer</option>
+                                    <option>Football</option>
+                                    <option>Hockey</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,7 +117,7 @@
                                 Description:
                             </label>
                             <div class="col-md-5">
-                                <textarea class="form-control" id="gameDescription" rows="3"></textarea>
+                                <textarea class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -105,6 +131,7 @@
             </div>
         </div>
     </div>
+    <!-- CREATE GAME MODAL END -->
 
     <div class="container-fluid" id="main">
         <div class="row">
