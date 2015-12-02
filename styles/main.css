@@ -42,6 +42,35 @@ body {
     background: #3074a4;
     color: #fff;
 }
+.map-overlay-text {
+    color: #FFF;
+    display: block;
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    width: 320px;
+    margin: -20px 0 0 -130px;
+    z-index: 100;
+    text-align: center;
+    padding: 10px;
+    border-radius: 3px;
+}
+.map-overlay {
+    background: #B0C4DE;
+    color: #FFF;
+    display: block;
+    position: absolute;
+    top: 24px;
+    height: 40px;
+    left: 50%;
+    width: 320px;
+    margin: -20px 0 0 -130px;
+    z-index: 100;
+    text-align: center;
+    padding: 10px;
+    border-radius: 3px;
+    opacity: 0.6;
+}
 
 /* NAVBAR */
 #loginButton, #userProfile{
