@@ -14,6 +14,12 @@
     <!-- Bootstrap -->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/></script>
     <!-- Bootstrap end -->
+    <!-- Moment.js -->
+    <script type="text/javascript" src="js/momentjs/moment.js"/></script>
+    <!-- Moment.js end -->
+    <!-- Datetime-picker.js -->
+    <script type="text/javascript" src="js/datetime-picker/bootstrap-datetimepicker.js"/></script>
+    <!-- Datetime-picker.js end -->
     <script type="text/javascript" src="js/facebook_helper.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
@@ -101,10 +107,18 @@
                 <div class="modal-body">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-md-4 col-md-offset-1">
+                            <label>
+                                Event Name:
+                            </label>
+                            <div id="createGameFormItem">
+                                <input class="form-control" rows="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
                                 Sport:                                
                             </label>
-                            <div class="col-md-5">
+                            <div id="createGameFormItem">
                                 <select class="form-control" id="sportSelector">
                                     <option>Basketball</option>
                                     <option>Soccer</option>
@@ -120,15 +134,46 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 col-md-offset-1">
+                            <label>
+                                Date/Time:                                
+                            </label>
+                            <div id="createGameFormItem">
+                                
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+
+
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>
                                 Description:
                             </label>
-                            <div class="col-md-5">
+                            <div id="createGameFormItem">
                                 <textarea class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-2 col-md-offset-8">
+                            <div>
                                 <input id="createGameButton" class="btn btn-success" value="Create Game">
                             </div>
                         </div>

@@ -77,4 +77,7 @@ img {
 #gameDescription{
     resize: vertical;
 }
+#createGameFormItem {
+    padding:10px;
+}
 /* MODAL END */

@@ -13,6 +13,7 @@ $(document).ready(function() {
         createEvent(spt,dsc,new_lat,new_lng);
         $("#createGameForm").modal("toggle");
     });
+    
 });
 
 function updateMap() {
