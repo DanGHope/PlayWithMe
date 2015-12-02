@@ -80,4 +80,8 @@ img {
 #createGameFormItem {
     padding:10px;
 }
+
+#createGameFormItem .form-control {
+    background-color: #FFFFFF;
+}
 /* MODAL END */

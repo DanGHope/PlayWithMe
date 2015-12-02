@@ -13,7 +13,11 @@ $(document).ready(function() {
         createEvent(spt,dsc,new_lat,new_lng);
         $("#createGameForm").modal("toggle");
     });
-    
+
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii"
+    });
+
 });
 
 function updateMap() {
