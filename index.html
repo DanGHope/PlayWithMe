@@ -19,7 +19,7 @@
     <!-- Datetime Picker -->
     <link href="DateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <script type="text/javascript" src="DateTimePicker/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
-    
+
     <!-- Fonts -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
@@ -51,7 +51,7 @@
                         <img id="userPicture">
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a type="submit" data-toggle="modal" data-target="#myGames" href="#">My Games</a></li>
+                        <li><a id="myGamesButton" type="submit" data-toggle="modal" data-target="#myGames" href="#">My Games</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="logoutButton" href="#">Logout</a></li>
                     </ul>
@@ -94,90 +94,14 @@
                     </button>
                     <h4 class="modal-title">My Games</h4>
                 </div>
-                <div class="modal-body" id="myGamesList">
+                <div class="modal-body">
                     <div class="panel panel-default">
-                        <ul class="list-group">
-                            <!--  Created Game layout --> 
-                            <li class="list-group-item">
-                                <div class="clearfix">
-                                    <h4 class="panel-title pull-left">
-                                        <a id="#gameTitle" data-toggle="collapse" aria-expanded="false" data-target="#collapse1" href="#collapseOne">
-                                                    Game Title
-                                        </a> 
-                                    </h4> 
-                                    <a id="deletGameBtn" class="btn btn-danger pull-right" href="#">
-                                        <i class="fa fa-trash-o fa-lg"></i> Delete
-                                    </a>
-                                </div>
-                                <div id="collapse1" aria-expanded="false" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Sport: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Descrition: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Date/Time: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Participants: </p>
-                                            </div>
-                                        </div>
+                        <ul class="list-group" id="myGamesList">
 
-                                    </div>
-                                </div>    
-                            </li>
-                            <!--  Joined Game layout --> 
-                            <li class="list-group-item">
-                                <div class="clearfix">
-                                    <h4 class="panel-title pull-left">
-                                        <a id="#gameTitle" data-toggle="collapse" aria-expanded="false" data-target="#collapse1" href="#collapseOne">
-                                                    Game Title
-                                        </a> 
-                                    </h4> 
-                                    <a id="deletGameBtn" class="btn btn-warning pull-right" href="#">
-                                        <i class="fa fa-user-times fa-lg"></i> Leave
-                                    </a>
-                                </div>
-                                <div id="collapse2" aria-expanded="false" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Sport: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Descrition: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Date/Time: </p>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <p class="pull-left">Participants: </p>
-                                            </div>
-                                        </div>
+    <!--Games Here bruh-->
 
-                                    </div>
-                                </div>    
-                            </li>
-                            
                         </ul>
                     </div>
-                    
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -236,7 +160,7 @@
                                 </div>
                               </div>
                             </div>
-                            
+
                         </div>
                         <div class="form-group">
                             <label>
@@ -279,7 +203,7 @@
 
                 <!-- GAMES LIST -->
                 <div id="game-list">
-                    
+
 
                 </div>
                 <!-- GAMES LIST -->

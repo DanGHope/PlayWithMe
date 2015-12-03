@@ -5,6 +5,7 @@ function generate_geojson($db){
     $stmt = $db->prepare("SELECT * FROM events");
     $stmt->execute();
     $result = $stmt->fetchAll();
+    $stmt2 = $db->prepare("SELECT `user_id` FROM people JOIN events USING(`id`) WHERE `id`=:eventID;");
 
     $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 
@@ -15,6 +16,11 @@ function generate_geojson($db){
         $owner = $row['owner'];
         $players = $row['players'];
         $date = $row['date'];
+        $eventID = $row['id'];
+
+        $stmt2->bindParam(":eventID",$eventID);
+        $stmt2->execute();
+        $people = $stmt2->fetchAll(PDO::FETCH_COLUMN, 0);
 
         switch($event){
             case 'Soccer':
@@ -44,6 +50,7 @@ function generate_geojson($db){
             default:
             $sym = 'pitch';
         }
+
         $marker = array(
             'type' => 'Feature',
             'properties' => array(
@@ -55,8 +62,8 @@ function generate_geojson($db){
                 'description' => $description,
                 'owner' => $owner,
                 'date' => $date,
-                'player' => $players,
-                'id' => $row['id']
+                'players' => $players,
+                'id' => $eventID
             ),
             'geometry' => array(
                 'type' => 'Point',
@@ -64,7 +71,8 @@ function generate_geojson($db){
                     $row['lat'],
                     $row['lng']
                 )
-            )
+            ),
+            'people' => $people
         );
         array_push($geojson['features'], $marker);
     }

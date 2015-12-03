@@ -13,18 +13,69 @@ $(document).ready(function() {
         var spt = $("#sportSelector").val();
         var dsc = $("#sportDescription").val();
         var date = $("#sportDate").val();
-        console.log("DATE: "+date);
+        console.log("DATE: " + date);
         var name = $("#sportName").val();
         var players = $("#sportPlayers").val();
-        createEvent(name, date, spt, dsc, new_lat, new_lng, userID,players);
+        createEvent(name, date, spt, dsc, new_lat, new_lng, userID, players);
         $("#createGameForm").modal("toggle");
+    });
+
+    $("#myGamesButton").click(function() {
+        updateMyGames();
     });
 
     $(".form_datetime").datetimepicker({
         format: "yy-mm-dd hh:mm:00"
     });
-
 });
+
+function createMyGamesForm(id, title, owner, sport, desc, date, people) {
+    var leaveBtn = $('<a id="leaveGameBtn" class="btn btn-warning pull-right" onclick="leaveEvent(' + id + ')" href="#"><i class="fa fa-user-times fa-lg"></i> Leave</a>');
+    var deleteBtn = $('<a id="deleteGameBtn" class="btn btn-danger pull-right" onclick="deleteEvent(' + id + ')" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>');
+    var m = $('<li class="list-group-item"></li>');
+    var m1 = $('<div class="clearfix"></div>');
+    m.append(m1);
+    var t0 = $('<h4 class="panel-title pull-left"><a id="#gameTitle" data-toggle="collapse" aria-expanded="false" data-target="#collapse' + id + '" href="#collapseOne"></a></h4>');
+    var t = $('<a id="#gameTitle" data-toggle="collapse" aria-expanded="false" data-target="#collapse' + id + '" href="#collapseOne">' + title + '</a>');
+    t0.append(t);
+    m1.append(t0);
+    if (owner) {
+        m1.append(deleteBtn);
+    } else {
+        m1.append(leaveBtn);
+    }
+    var m2 = $('<div id="collapse' + id + '" aria-expanded="false" class="panel-collapse collapse"></div>');
+    m.append(m2);
+    var b = $('<div class="panel-body">');
+    m2.append(b);
+    var c0 = $('<div class="panel panel-default"><div class="panel-body"><p class="pull-left">Sport: ' + sport + '</p></div></div>');
+    b.append(c0);
+    var c1 = $('<div class="panel panel-default"><div class="panel-body"><p class="pull-left">Description: ' + desc + '</p></div></div>');
+    b.append(c1);
+    var c2 = $('<div class="panel panel-default"><div class="panel-body"><p class="pull-left">Date/Time: ' + date + '</p></div></div>');
+    b.append(c2);
+    var c3 = $('<div class="panel panel-default"><div class="panel-body"><p class="pull-left">Participants: ' + people + '</p></div></div>');
+    b.append(c3);
+    $("#myGamesList").append(m);
+}
+//title, owner, sport, desc, date, people
+function updateMyGames() {
+    $("#myGamesList").empty();
+    myLayer.eachLayer(function(e) {
+        var i = e.feature.properties.id;
+        var t = e.feature.properties.title;
+        var s = e.feature.properties.event;
+        var de = e.feature.properties.description;
+        var da = e.feature.properties.date;
+        var p = e.feature.people.length + " / " + e.feature.properties.players;
+        if (e.feature.properties.owner == userID) {
+            createMyGamesForm(i, t, 1, s, de, da, p);
+        } else if ($.inArray(userID, e.feature.people) >= 0) {
+            createMyGamesForm(i, t, 0, s, de, da, p);
+        }
+    });
+
+}
 
 function updateMap() {
     //Request an updated events geojson
@@ -48,7 +99,15 @@ function updateList() {
                     title = e.feature.properties.title;
                 }
             }
-            var newEvent = $('<div class="panel panel-default"><div class="panel-heading"><a href="#">' + title + '</a></div><div class="panel-body"><div class="row"><div class="col-md-3"><h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/67563683055/picture?type=square"><p>FirstName</p></div><div class="col-md-9"><!-- Details --><div class="row"><div class="col-md-5"><div class="row"><p class="pull-left"><b>Date/Time:</b> </p><p> 12/12/2015 - 03:30 PM </p></div></div><div class="col-md-5"><div class="row"><p class="pull-left"><b>Sport:</b></p><p>Basketball</p></div></div><div class="col-md-2"><div class="row"><p class="pull-left"><b>Players:</b></p><p>8 </p></div></div></div><div class="row"><div class="col-md-4"><div class="row"><p class="pull-left"><b>Description:</b> </p></div></div></div><div><p align="left">' + e.feature.properties.description + '</p></div></div></div><button type="submit" class="btn btn-success pull-right">Join Game</button></div></div>');
+            var o = e.feature.properties.owner;
+            var i = e.feature.properties.id;
+            var t = e.feature.properties.title;
+            var s = e.feature.properties.event;
+            var de = e.feature.properties.description;
+            var da = e.feature.properties.date;
+            var p = e.feature.people.length + " / " + e.feature.properties.players;
+            var n = getName(o);
+            var newEvent = $('<div class="panel panel-default"><div class="panel-heading"><a href="#">' + t + '</a></div><div class="panel-body"><div class="row"><div class="col-md-3"><h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/'+o+'/picture?type=square"><p>'+n+'</p></div><div class="col-md-9"><!-- Details --><div class="row"><div class="col-md-5"><div class="row"><p class="pull-left"><b>Date/Time: </b> </p><p> '+da+' </p></div></div><div class="col-md-5"><div class="row"><p class="pull-left"><b>Sport:</b></p><p>'+s+'</p></div></div><div class="col-md-2"><div class="row"><p class="pull-left"><b>Players: </b></p><p>'+p+'</p></div></div></div><div class="row"><div class="col-md-4"><div class="row"><p class="pull-left"><b>Description:</b> </p></div></div></div><div><p align="left">' + de + '</p></div></div></div><button type="submit" class="btn btn-success pull-right">Join Game</button></div></div>');
             $("#game-list").append(newEvent);
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
@@ -76,6 +135,35 @@ function createEvent(name, date, sport, desc, lat, lng, userid, players) {
             lng: lng,
             owner: userid,
             players: players
+        },
+        success: function(data) {
+            console.log("Success: " + data);
+            updateMap();
+        }
+    });
+}
+
+function joinEvent(id) {
+    $.ajax({
+        type: "POST",
+        url: "php/join_event.php",
+        data: {
+            userID: userID,
+            eventID: id
+        },
+        success: function(data) {
+            console.log("Success: " + data);
+        }
+    });
+}
+
+function leaveEvent(id) {
+    $.ajax({
+        type: "POST",
+        url: "php/leave_event.php",
+        data: {
+            userID: userID,
+            eventID: id
         },
         success: function(data) {
             console.log("Success: " + data);
@@ -123,6 +211,7 @@ function loadMap() {
 
     myLayer.on('click', function(e) {
         curEvent = e.layer.feature.properties;
+        console.log(e.layer.feature.properties.id);
         updateList();
     });
 

@@ -57,6 +57,20 @@ function getDisplayPicture(userId) {
     );
 }
 
+function getName(userID) {
+    /*
+    FB.api(
+        "/" + userID,
+        function(response) {
+            if (response && !response.error) {
+                return response.first_name;
+            }
+        }
+    );
+    */
+    return "Bro";
+}
+
 function logAPIResponse() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
@@ -64,7 +78,7 @@ function logAPIResponse() {
         getDisplayPicture(response.id);
         $("#status").text('Thanks for logging in, ' + response.name + '!');
         loggedIn(response.name);
-        userID=response.id;
+        userID = response.id;
     });
 }
 
