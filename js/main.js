@@ -15,12 +15,13 @@ $(document).ready(function() {
         var date = $("#sportDate").val();
         console.log("DATE: "+date);
         var name = $("#sportName").val();
-        createEvent(name, date, spt, dsc, new_lat, new_lng, userID);
+        var players = $("#sportPlayers").val();
+        createEvent(name, date, spt, dsc, new_lat, new_lng, userID,players);
         $("#createGameForm").modal("toggle");
     });
 
     $(".form_datetime").datetimepicker({
-        format: "dd MM yyyy - hh:ii"
+        format: "yy-mm-dd hh:mm:00"
     });
 
 });
@@ -39,12 +40,12 @@ function updateList() {
     bounds = map.getBounds();
     myLayer.eachLayer(function(e) {
         if (bounds.contains(e.getLatLng())) {
-            var title = e.feature.properties.event;
+            var title = e.feature.properties.title;
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
-                    title = "<b>" + e.feature.properties.event + "</b>";
+                    title = "<b>" + e.feature.properties.title + "</b>";
                 } else {
-                    title = e.feature.properties.event;
+                    title = e.feature.properties.title;
                 }
             }
 
@@ -63,7 +64,7 @@ function updateList() {
     });
 }
 
-function createEvent(name, date, sport, desc, lat, lng, userid) {
+function createEvent(name, date, sport, desc, lat, lng, userid, players) {
     $.ajax({
         type: "POST",
         url: "php/add_event.php",
@@ -74,7 +75,8 @@ function createEvent(name, date, sport, desc, lat, lng, userid) {
             desc: desc,
             lat: lat,
             lng: lng,
-            owner: userid
+            owner: userid,
+            players: players
         },
         success: function(data) {
             console.log("Success: " + data);
