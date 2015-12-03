@@ -14,8 +14,9 @@ try{
     $date = $_REQUEST['date'];
     $owner = $_REQUEST['owner'];
     $desc = $_REQUEST['desc'];
+    $players = $_REQUEST['players'];
 
-    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`, `name`, `date`, `owner`, `description`) VALUES (?,?,?,?,?,?)");
+    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`, `name`, `date`, `owner`, `description`, `players`) VALUES (?,?,?,?,?,?,?,?)");
     $stmt->bindParam(1,$lng);
     $stmt->bindParam(2,$lat);
     $stmt->bindParam(3,$event);
@@ -23,6 +24,7 @@ try{
     $stmt->bindParam(5,$date);
     $stmt->bindParam(6,$owner);
     $stmt->bindParam(7,$desc);
+    $stmt->bindParam(8,$players);
     $stmt->execute();
 
     $db = null;

@@ -9,7 +9,13 @@ function generate_geojson($db){
     $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 
     foreach($result as $row){
+        $name = $row['name'];
         $event = $row['event'];
+        $description = $row['description'];
+        $owner = $row['owner'];
+        $players = $row['players'];
+        $date = $row['date'];
+
         switch($event){
             case 'Soccer':
             $sym = 'soccer';
@@ -45,8 +51,11 @@ function generate_geojson($db){
                 'marker-size' => 'medium',
                 'marker-symbol' => $sym,
                 'event' => $event,
-                'title' => $event,
-                'description' => "Looking for people to play $event",
+                'title' => $name,
+                'description' => $description,
+                'owner' => $owner,
+                'date' => $date,
+                'player' => $players,
                 'id' => $row['id']
             ),
             'geometry' => array(
