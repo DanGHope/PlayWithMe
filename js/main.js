@@ -50,7 +50,7 @@ function createGameItemOnList(title, id, firstName, sport, date, playerCount, de
     var eventDetails = $('<div class="row"><div class="col-md-3"><label for="sport">Sport:</label><p>' + sport + '</p></div><div class="col-md-4"><label for="eventDate">Date</label><p>' + date + '</p></div><div class="col-md-2"><label for="playerCount">Players:</label><p>' + playerCount + '</p></div></div>');
     gameInfo.append(eventDetails);
 
-    var eventDescription = $('<div class="row"><div class="col-md-3"><label for="description">Description:</label></div><div class="col-md-4"></div><div class="col-md-2"></div></div><div class="row"><div class="col-md-9"><p>' + description + '</p></div></div>')
+    var eventDescription = $('<div class="row"><div class="col-md-3"><label for="description">Description:</label></div><div class="col-md-4"></div><div class="col-md-2"></div></div><div class="row"><div class="col-md-9"><p align="left">' + description + '</p></div></div>')
     gameInfo.append(eventDescription);
 
     bodyRow.append(gameInfo);
