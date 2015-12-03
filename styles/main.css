@@ -1,7 +1,8 @@
 html, body {
     background-color: white;
     text-align: center;
-    height: 100%
+    height: 100%;
+    font-family: Lato;
 }
 body {
     padding-top: 50px;
@@ -73,6 +74,28 @@ body {
 }
 
 /* NAVBAR */
+/* navbar title */
+.navbar-default .navbar-brand {
+    font-family: Pacifico;
+    font-weight: bold;
+    color: #24D999;
+}
+/* navbar background color */
+.navbar-default {
+    background-color: white;
+}
+/* User name nav bar text color */
+.navbar-default .navbar-nav>li>a {
+    color: #333;
+}
+/* On Click User name */
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: white;
+}
+/* Game List Panel Background color */
+.panel-default>.panel-heading {
+    background-color: #d4f7eb;
+}
 #loginButton, #userProfile{
     padding-right: 10px;
 }

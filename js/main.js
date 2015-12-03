@@ -48,8 +48,7 @@ function updateList() {
                     title = e.feature.properties.title;
                 }
             }
-
-            var newEvent = $('<div class="panel panel-default"><div class="panel-heading"><a href="#">' + title + '</a></div></div><p>' + e.feature.properties.description + '</p><hr>');
+            var newEvent = $('<div class="panel panel-default"><div class="panel-heading"><a href="#">' + title + '</a></div><div class="panel-body"><div class="row"><div class="col-md-3"><h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/67563683055/picture?type=square"><p>FirstName</p></div><div class="col-md-9"><!-- Details --><div class="row"><div class="col-md-5"><div class="row"><p class="pull-left"><b>Date/Time:</b> </p><p> 12/12/2015 - 03:30 PM </p></div></div><div class="col-md-5"><div class="row"><p class="pull-left"><b>Sport:</b></p><p>Basketball</p></div></div><div class="col-md-2"><div class="row"><p class="pull-left"><b>Players:</b></p><p>8 </p></div></div></div><div class="row"><div class="col-md-4"><div class="row"><p class="pull-left"><b>Description:</b> </p></div></div></div><div><p align="left">' + e.feature.properties.description + '</p></div></div></div><button type="submit" class="btn btn-success pull-right">Join Game</button></div></div>');
             $("#game-list").append(newEvent);
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
