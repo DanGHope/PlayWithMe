@@ -29,6 +29,35 @@ $(document).ready(function() {
     });
 });
 
+function createGameItemOnList(title, id, firstName, sport, date, playerCount, description){
+    var submitBtn = $('<button type="submit" class="btn btn-success pull-right">Join Game</button>');
+    
+    var listItem = $('<div class="panel panel-default">');
+    var title = $('<div class="panel-heading"><a href="#">'+ title +'</a></div>');
+    listItem.append(title);
+
+    var body = $('<div class="panel-body">');
+    var bodyRow = $('<div class="row">');
+    body.append(bodyRow);
+    listItem.append(body);
+
+    var userInfo = $('<div class="col-md-3">');
+    var userDetails = $('<h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/'+ id +'/picture?type=square"><p>' + firstName + '</p>')
+    userInfo.append(userDetails);
+    bodyRow.append(userInfo);
+
+    var gameInfo = $('<div class="col-md-9">');
+    var eventDetails = $('<div class="row"><div class="col-md-3"><label for="sport">Sport:</label><p>' + sport + '</p></div><div class="col-md-4"><label for="eventDate">Date</label><p>' + date + '</p></div><div class="col-md-2"><label for="playerCount">Players:</label><p>' + playerCount + '</p></div></div>');
+    gameInfo.append(eventDetails);
+
+    var eventDescription = $('<div class="row"><div class="col-md-3"><label for="description">Description:</label></div><div class="col-md-4"></div><div class="col-md-2"></div></div><div class="row"><div class="col-md-9"><p>' + description + '</p></div></div>')
+    gameInfo.append(eventDescription);
+
+    bodyRow.append(gameInfo);
+    body.append(submitBtn);
+    $('#game-list').append(listItem);
+}
+
 function createMyGamesForm(id, title, owner, sport, desc, date, people) {
     var leaveBtn = $('<a id="leaveGameBtn" class="btn btn-warning pull-right" onclick="leaveEvent(' + id + ')" href="#"><i class="fa fa-user-times fa-lg"></i> Leave</a>');
     var deleteBtn = $('<a id="deleteGameBtn" class="btn btn-danger pull-right" onclick="deleteEvent(' + id + ')" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>');
@@ -107,8 +136,11 @@ function updateList() {
             var da = e.feature.properties.date;
             var p = e.feature.people.length + " / " + e.feature.properties.players;
             var n = getName(o);
-            var newEvent = $('<div class="panel panel-default"><div class="panel-heading"><a href="#">' + t + '</a></div><div class="panel-body"><div class="row"><div class="col-md-3"><h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/'+o+'/picture?type=square"><p>'+n+'</p></div><div class="col-md-9"><!-- Details --><div class="row"><div class="col-md-5"><div class="row"><p class="pull-left"><b>Date/Time: </b> </p><p> '+da+' </p></div></div><div class="col-md-5"><div class="row"><p class="pull-left"><b>Sport:</b></p><p>'+s+'</p></div></div><div class="col-md-2"><div class="row"><p class="pull-left"><b>Players: </b></p><p>'+p+'</p></div></div></div><div class="row"><div class="col-md-4"><div class="row"><p class="pull-left"><b>Description:</b> </p></div></div></div><div><p align="left">' + de + '</p></div></div></div><button type="submit" class="btn btn-success pull-right">Join Game</button></div></div>');
-            $("#game-list").append(newEvent);
+
+            /*
+             *createGameItemOnList(title, id, firstName, sport, date, playerCount, description){
+             */
+            $("#game-list").append(createGameItemOnList(t, o, n, s, da, p, de));
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
                     var container = $("#left");

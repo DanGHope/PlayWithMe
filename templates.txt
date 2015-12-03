@@ -67,3 +67,47 @@
                                     </div>
                                 </div>    
                             </li>
+
+// Games List
+<div class="panel panel-default">
+    <div class="panel-heading"><a href="#">Pickup Basketball</a></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Host:</h5>
+                        <!-- User Info --><img src="http://graph.facebook.com/4/picture?type=square">
+                        <p>Matthew</p>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="sport">Sport:</label>
+                            <p>Basketball</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="eventDate">Date</label>
+                            <p>12/24/2015 - 8:30 PM</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="playerCount">Players:</label>
+                            <p>0/2</p>
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="description">Description:</label>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2"></div>   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>The Quick Brown Fox jumped over the laxy dog.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <button type="submit" class="btn btn-success pull-right">Join Game</button>
+</div>
