@@ -2,10 +2,10 @@
 require_once 'dbconfig.php';
 
 function generate_geojson($db){
-    $stmt = $db->prepare("SELECT * FROM events");
+    $stmt = $db->prepare("SELECT * FROM events JOIN people USING(`user_id`)");
     $stmt->execute();
     $result = $stmt->fetchAll();
-    $stmt2 = $db->prepare("SELECT `user_id` FROM people JOIN events USING(`id`) WHERE `id`=:eventID;");
+    $stmt2 = $db->prepare("SELECT `people`.`user_id`,`user_name` FROM people JOIN attending USING(`user_id`) JOIN events USING(`id`) WHERE `id`=:eventID");
 
     $geojson = array( 'type' => 'FeatureCollection', 'features' => array());
 
@@ -13,14 +13,15 @@ function generate_geojson($db){
         $name = $row['name'];
         $event = $row['event'];
         $description = $row['description'];
-        $owner = $row['owner'];
+        $owner = $row['user_id'];
+        $ownername = $row['user_name'];
         $players = $row['players'];
         $date = $row['date'];
         $eventID = $row['id'];
 
         $stmt2->bindParam(":eventID",$eventID);
         $stmt2->execute();
-        $people = $stmt2->fetchAll(PDO::FETCH_COLUMN, 0);
+        $people = $stmt2->fetchAll();
 
         switch($event){
             case 'Soccer':
@@ -61,6 +62,7 @@ function generate_geojson($db){
                 'title' => $name,
                 'description' => $description,
                 'owner' => $owner,
+                'ownername' => $ownername,
                 'date' => $date,
                 'players' => $players,
                 'id' => $eventID

@@ -16,7 +16,7 @@ try{
     $desc = $_REQUEST['desc'];
     $players = $_REQUEST['players'];
 
-    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`, `name`, `date`, `owner`, `description`, `players`) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt = $db->prepare("INSERT INTO `events`(`lat`, `lng`, `event`, `name`, `date`, `user_id`, `description`, `players`) VALUES (?,?,?,?,?,?,?,?)");
     $stmt->bindParam(1,$lng);
     $stmt->bindParam(2,$lat);
     $stmt->bindParam(3,$event);

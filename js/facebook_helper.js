@@ -57,19 +57,6 @@ function getDisplayPicture(userId) {
     );
 }
 
-function getName(userID) {
-    /*
-    FB.api(
-        "/" + userID,
-        function(response) {
-            if (response && !response.error) {
-                return response.first_name;
-            }
-        }
-    );
-    */
-    return "Bro";
-}
 
 function logAPIResponse() {
     console.log('Welcome!  Fetching your information.... ');
@@ -79,6 +66,19 @@ function logAPIResponse() {
         $("#status").text('Thanks for logging in, ' + response.name + '!');
         loggedIn(response.name);
         userID = response.id;
+        name = response.name;
+        $.ajax({
+            type: "POST",
+            url: "php/add_person.php",
+            data: {
+                userid: userID,
+                name: name
+            },
+            success: function(data) {
+                console.log("Success: " + data);
+                updateList();
+            }
+        });
     });
 }
 

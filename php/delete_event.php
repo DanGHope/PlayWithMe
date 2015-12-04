@@ -8,10 +8,8 @@ try{
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
     $event = $_REQUEST['eventID'];
-    $userid = $_REQUEST['userID'];
 
-    $stmt = $db->prepare("DELETE FROM `attending` WHERE `user_id`=:userid AND `id`=:eventid");
-    $stmt->bindParam(":userid",$userid);
+    $stmt = $db->prepare("DELETE FROM `events` WHERE `id`=:eventid");
     $stmt->bindParam(":eventid",$event);
     $stmt->execute();
 

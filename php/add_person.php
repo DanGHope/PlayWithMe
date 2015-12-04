@@ -7,12 +7,12 @@ try{
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-    $event = $_REQUEST['eventID'];
-    $userid = $_REQUEST['userID'];
+    $userid = $_REQUEST['userid'];
+    $name = $_REQUEST['name'];
 
-    $stmt = $db->prepare("DELETE FROM `attending` WHERE `user_id`=:userid AND `id`=:eventid");
-    $stmt->bindParam(":userid",$userid);
-    $stmt->bindParam(":eventid",$event);
+    $stmt = $db->prepare("INSERT INTO `people`(`user_id`, `user_name`) VALUES (?,?)");
+    $stmt->bindParam(1,$userid);
+    $stmt->bindParam(2,$name);
     $stmt->execute();
 
     $db = null;

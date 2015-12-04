@@ -4,10 +4,11 @@ var new_lat, new_lng;
 var userID;
 
 $(document).ready(function() {
+    loadFacebook();
     updateMap();
     loadMap();
     userID = -1;
-    loadFacebook();
+
 
     $("#createGameButton").click(function() {
         var spt = $("#sportSelector").val();
@@ -29,9 +30,7 @@ $(document).ready(function() {
     });
 });
 
-function createGameItemOnList(title, eventID, hostID, firstName, sport, date, playerCount, description){
-    var submitBtn = $('<button type="submit" class="btn btn-success pull-right" onclick="joinEvent(' + eventID + ')" >Join Game</button>');
-    
+function createGameItemOnList(title, eventID, hostID, firstName, sport, date, playerCount, description, btn){
     var listItem = $('<div class="panel panel-default">');
     var title = $('<div class="panel-heading"><a href="#">'+ title +'</a></div>');
     listItem.append(title);
@@ -54,14 +53,14 @@ function createGameItemOnList(title, eventID, hostID, firstName, sport, date, pl
     gameInfo.append(eventDescription);
 
     bodyRow.append(gameInfo);
-    body.append(submitBtn);
+    body.append(btn);
     $('#game-list').append(listItem);
 }
 
 function createMyGamesForm(id, title, owner, sport, desc, date, people) {
     var leaveBtn = $('<a id="leaveGameBtn" class="btn btn-warning pull-right" onclick="leaveEvent(' + id + ')" href="#"><i class="fa fa-user-times fa-lg"></i> Leave</a>');
     var deleteBtn = $('<a id="deleteGameBtn" class="btn btn-danger pull-right" onclick="deleteEvent(' + id + ')" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>');
-    var m = $('<li class="list-group-item"></li>');
+    var m = $('<li id="gamesFormItem' + id + '" class="list-group-item"></li>');
     var m1 = $('<div class="clearfix"></div>');
     m.append(m1);
     var t0 = $('<h4 class="panel-title pull-left"><a id="#gameTitle" data-toggle="collapse" aria-expanded="false" data-target="#collapse' + id + '" href="#collapseOne"></a></h4>');
@@ -99,8 +98,13 @@ function updateMyGames() {
         var p = e.feature.people.length + " / " + e.feature.properties.players;
         if (e.feature.properties.owner == userID) {
             createMyGamesForm(i, t, 1, s, de, da, p);
-        } else if ($.inArray(userID, e.feature.people) >= 0) {
-            createMyGamesForm(i, t, 0, s, de, da, p);
+        } else {
+            for (x = 0; x < e.feature.people.length; x++) {
+                if (e.feature.people[x].user_id == userID) {
+                    createMyGamesForm(i, t, 0, s, de, da, p);
+                    break;
+                }
+            }
         }
     });
 
@@ -118,37 +122,27 @@ function updateList() {
     $("#game-list").remove();
     $("<div id='game-list'></div>").insertAfter('#game-header');
     bounds = map.getBounds();
+    console.log(userID);
     myLayer.eachLayer(function(e) {
         if (bounds.contains(e.getLatLng())) {
-            var title = e.feature.properties.title;
-            if (curEvent) {
-                if (e.feature.properties.id == curEvent.id) {
-                    title = "<b>" + e.feature.properties.title + "</b>";
-                } else {
-                    title = e.feature.properties.title;
-                }
-            }
             var o = e.feature.properties.owner;
-            var i = e.feature.properties.id;
-            var t = e.feature.properties.title;
-            var s = e.feature.properties.event;
-            var de = e.feature.properties.description;
-            var da = e.feature.properties.date;
-            var p = e.feature.people.length + " / " + e.feature.properties.players;
-            var n = getName(o);
-
-            /*
-             *createGameItemOnList(title, id, firstName, sport, date, playerCount, description){
-             */
-            $("#game-list").append(createGameItemOnList(t, i, o, n, s, da, p, de));
-            if (curEvent) {
-                if (e.feature.properties.id == curEvent.id) {
-                    var container = $("#left");
-                    var scrollTo = newEvent;
-                    container.animate({
-                        scrollTop: scrollTo.offset().top - container.offset().top - container.scrollTop()
-                    });
+            if (o != userID) {
+                var i = e.feature.properties.id;
+                var t = e.feature.properties.title;
+                var s = e.feature.properties.event;
+                var de = e.feature.properties.description;
+                var da = e.feature.properties.date;
+                var p = e.feature.people.length + " / " + e.feature.properties.players;
+                var n = e.feature.properties.ownername;
+                var btnText = '<button type="submit" onclick="joinEvent(' + i + ')" class="btn btn-success pull-right">Join Game</button>';
+                for (x = 0; x < e.feature.people.length; x++) {
+                    if (e.feature.people[x].user_id == userID) {
+                        btnText = '<button type="submit" onclick="leaveEvent(' + i + ')" class="btn btn-warning pull-right">Leave Game</button>';
+                        break;
+                    }
                 }
+                $("#game-list").append(createGameItemOnList(t, i, o, n, s, da, p, de, btnText));
+
             }
         }
     });
@@ -175,6 +169,21 @@ function createEvent(name, date, sport, desc, lat, lng, userid, players) {
     });
 }
 
+function deleteEvent(id){
+    $.ajax({
+        type: "POST",
+        url: "php/delete_event.php",
+        data: {
+            eventID: id
+        },
+        success: function(data) {
+            console.log("Success: " + data);
+            updateMap();
+            $("#gamesFormItem" + id).hide().animate(500);
+        }
+    });
+}
+
 function joinEvent(id) {
     $.ajax({
         type: "POST",
@@ -185,6 +194,8 @@ function joinEvent(id) {
         },
         success: function(data) {
             console.log("Success: " + data);
+            updateMap();
+            setTimeout(updateList, 600);
         }
     });
 }
@@ -200,6 +211,8 @@ function leaveEvent(id) {
         success: function(data) {
             console.log("Success: " + data);
             updateMap();
+            $("#gamesFormItem" + id).hide().animate(500);
+            setTimeout(updateList, 600);
         }
     });
 }
@@ -245,6 +258,14 @@ function loadMap() {
         curEvent = e.layer.feature.properties;
         console.log(e.layer.feature.properties.id);
         updateList();
+        var container = $("#left");
+        var scrollTo = $("#leftPanel" + curEvent.id);
+        if (scrollTo.top!==undefined) {
+            container.animate({
+                scrollTop: scrollTo.offset().top - container.offset().top - container.scrollTop()
+            });
+        }
+
     });
 
     map.on('click', function(e) {

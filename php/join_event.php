@@ -10,7 +10,7 @@ try{
     $event = $_REQUEST['eventID'];
     $userid = $_REQUEST['userID'];
 
-    $stmt = $db->prepare("INSERT INTO `people`(`user_id`,`id`) VALUES (?,?)");
+    $stmt = $db->prepare("INSERT INTO `attending`(`user_id`,`id`) VALUES (?,?)");
     $stmt->bindParam(1,$userid);
     $stmt->bindParam(2,$event);
     $stmt->execute();
