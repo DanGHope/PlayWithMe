@@ -1,3 +1,23 @@
+/*
+ * PlayWithMe - An ADHOC Sports Web Application
+ *
+ * Copyright (C) 2015, Dan Hope, Matthew Militante
+ * All rights reserved.
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var map, myLayer;
 var curEvent;
 var new_lat, new_lng;
@@ -9,7 +29,7 @@ $(document).ready(function() {
     loadMap();
     userID = -1;
 
-
+    // onClick Listeners
     $("#createGameButton").click(function() {
         var spt = $("#sportSelector").val();
         var dsc = $("#sportDescription").val();
@@ -30,6 +50,7 @@ $(document).ready(function() {
     });
 });
 
+// Add a Sport Event item to the the left activity bar 
 function createGameItemOnList(title, eventID, hostID, firstName, sport, date, playerCount, description, btn){
     var listItem = $('<div class="panel panel-default">');
     var title = $('<div class="panel-heading"><a href="#">'+ title +'</a></div>');
@@ -57,6 +78,7 @@ function createGameItemOnList(title, eventID, hostID, firstName, sport, date, pl
     $('#game-list').append(listItem);
 }
 
+// Add a Sport Event Item to the myGames Modal
 function createMyGamesForm(id, title, owner, sport, desc, date, people) {
     var leaveBtn = $('<a id="leaveGameBtn" class="btn btn-warning pull-right" onclick="leaveEvent(' + id + ')" href="#"><i class="fa fa-user-times fa-lg"></i> Leave</a>');
     var deleteBtn = $('<a id="deleteGameBtn" class="btn btn-danger pull-right" onclick="deleteEvent(' + id + ')" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>');
@@ -86,7 +108,8 @@ function createMyGamesForm(id, title, owner, sport, desc, date, people) {
     b.append(c3);
     $("#myGamesList").append(m);
 }
-//title, owner, sport, desc, date, people
+
+// Update "My Games" modal with games joined or created
 function updateMyGames() {
     $("#myGamesList").empty();
     myLayer.eachLayer(function(e) {
@@ -120,6 +143,7 @@ function updateMap() {
     });
 }
 
+// Update "Available Games" list 
 function updateList() {
     $("#game-list").remove();
     $("<div id='game-list'></div>").insertAfter('#game-header');
@@ -150,6 +174,7 @@ function updateList() {
     });
 }
 
+// PHP Functions
 function createEvent(name, date, sport, desc, lat, lng, userid, players) {
     $.ajax({
         type: "POST",
@@ -230,6 +255,7 @@ function updateMap() {
     });
 }
 
+// Load MapBox 
 function loadMap() {
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGFuZ2hvcGUiLCJhIjoiY2loY2M0b3drMDFqbnVlbWF3aGJvYTJ0ZyJ9.NrOUOv9u0AkxEhptyBVexw';

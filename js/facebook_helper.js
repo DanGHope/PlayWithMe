@@ -1,3 +1,23 @@
+/*
+ * PlayWithMe - An ADHOC Sports Web Application
+ *
+ * Copyright (C) 2015, Dan Hope, Matthew Militante
+ * All rights reserved.
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 // Load Facebook Javascript SDK
 function loadFacebook() {
     window.fbAsyncInit = function() {
@@ -25,12 +45,14 @@ function loadFacebook() {
 
 }
 
+// Hide components on logout
 function loggedOut() {
     $("#userProfile").hide("fast");
     $("#loginButton").show("fast");
     $("#status").text('Please log into Facebook.');
 }
 
+// Display components on login
 function loggedIn(username) {
     // Hide Login Button
     $("#loginButton").hide("fast");
@@ -44,6 +66,7 @@ function loggedIn(username) {
     });
 }
 
+// Get user's display picture
 function getDisplayPicture(userId) {
     FB.api(
         "/" + userId + "/picture",
@@ -57,7 +80,7 @@ function getDisplayPicture(userId) {
     );
 }
 
-
+// If user is logged in, fetch data
 function logAPIResponse() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
@@ -82,6 +105,7 @@ function logAPIResponse() {
     });
 }
 
+// Call back function for loging
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -100,6 +124,7 @@ function statusChangeCallback(response) {
     }
 }
 
+// Check login state
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
