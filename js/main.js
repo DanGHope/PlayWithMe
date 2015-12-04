@@ -107,7 +107,9 @@ function updateMyGames() {
             }
         }
     });
-
+    if ( $('#myGamesList').children().length === 0 ) {
+    	$("#myGamesList").append("No Games Available");
+    }
 }
 
 function updateMap() {
