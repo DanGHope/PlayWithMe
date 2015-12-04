@@ -29,8 +29,8 @@ $(document).ready(function() {
     });
 });
 
-function createGameItemOnList(title, id, firstName, sport, date, playerCount, description){
-    var submitBtn = $('<button type="submit" class="btn btn-success pull-right">Join Game</button>');
+function createGameItemOnList(title, eventID, hostID, firstName, sport, date, playerCount, description){
+    var submitBtn = $('<button type="submit" class="btn btn-success pull-right" onclick="joinEvent(' + eventID + ')" >Join Game</button>');
     
     var listItem = $('<div class="panel panel-default">');
     var title = $('<div class="panel-heading"><a href="#">'+ title +'</a></div>');
@@ -42,7 +42,7 @@ function createGameItemOnList(title, id, firstName, sport, date, playerCount, de
     listItem.append(body);
 
     var userInfo = $('<div class="col-md-3">');
-    var userDetails = $('<h5>Host:</h5><!-- User Info --><img src="http://graph.facebook.com/'+ id +'/picture?type=square"><p>' + firstName + '</p>')
+    var userDetails = $('<h5>Host:</h5><img src="http://graph.facebook.com/'+ hostID +'/picture?type=square"><p>' + firstName + '</p>')
     userInfo.append(userDetails);
     bodyRow.append(userInfo);
 
@@ -140,7 +140,7 @@ function updateList() {
             /*
              *createGameItemOnList(title, id, firstName, sport, date, playerCount, description){
              */
-            $("#game-list").append(createGameItemOnList(t, o, n, s, da, p, de));
+            $("#game-list").append(createGameItemOnList(t, i, o, n, s, da, p, de));
             if (curEvent) {
                 if (e.feature.properties.id == curEvent.id) {
                     var container = $("#left");
