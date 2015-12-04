@@ -1,5 +1,9 @@
 PlayWithMe
 ==========
+PlayWithMe is an Ad-Hoc Sports Organization Web Application that connects you with other sports enthusiasts.
 
-Ad-Hoc Sports Organization Web APP - “You want to play a game of soccer? Open up
-this web app, change you status to “I want to play soccer in the next X hours”. When there is enough people who want to play at the same time as you within a given geographical zone, we all notify you, you chose a location/time and the game begins!”
+You want to play a game of soccer? Use our web app to find soccer games near you!
+Want to create a game but have no players? Click anywhere on the map to quickly create a new game event.
+
+## Built with:
+Facebook API, Mapbox, Twitter Bootstrap, JQuery, PHP, SQL
